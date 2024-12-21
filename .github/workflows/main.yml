@@ -1,0 +1,25 @@
+name: Windows-LiteManager
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Start Building..
+    runs-on: windows-latest
+    timeout-minutes: 9999
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Downloading & Installing Essentials
+        run: |
+          echo "Downloading and installing essentials..."
+          # Add your commands here
+          # Example: Install Chocolatey and essential tools
+          powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+          choco install git -y
